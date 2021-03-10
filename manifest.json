@@ -1,0 +1,29 @@
+{
+
+    "name": "Quick Manual: ERPNext",
+    "version": "0.0.1",
+    "description": "Quick personalized user manual on the sidebar!",
+    "permissions": ["activeTab", "clipboardRead", "clipboardWrite", "storage", "tabs"],
+    "options_page": "options/options.html",
+    "browser_action": {
+        "sidebar_icons": {
+            "128": "images/sidebarIcons/128.png"
+        }
+    },
+    "background": {
+        "scripts": ["background.js"],
+        "persistent": false
+    },
+    "content_scripts": [
+        {
+            "matches": ["https://*.dedicate.hooman.design/*"],
+            "css": ["sidebar/sidebar.css"],
+            "js": ["jquery-3.6.0.slim.js" ,"sidebar/sidebar.js"]
+        }
+    ],
+    "icons": {
+        "128": "images/addonIcons/128.png"
+    },
+    "manifest_version": 2
+
+}
