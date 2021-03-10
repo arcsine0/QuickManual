@@ -7,3 +7,7 @@
     border: 1px black solid;
     z-index: 99 !important;
 }
+iframe {
+    height: 100%;
+    width: 100%;
+}
