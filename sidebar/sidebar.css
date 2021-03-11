@@ -1,8 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik&display=swap');
+
 #sidebar {
     height: 90vh;
     width: 20vw;
     position: fixed;
     right: 1px;
+    bottom: 1px;
     background-color: white;
     border: 1px black solid;
     z-index: 99 !important;
@@ -10,4 +13,5 @@
 iframe {
     height: 100%;
     width: 100%;
+    font-family: 'Rubik', sans-serif;
 }

@@ -18,7 +18,7 @@
         {
             "matches": ["https://*.dedicate.hooman.design/*"],
             "css": ["sidebar/sidebar.css"],
-            "js": ["jquery-3.6.0.js" ,"sidebar/sidebar.js", "sidebar/createSidebar.js"]
+            "js": ["lib/jquery-3.6.0.js", "lib/pdf.js", "sidebar/sidebar.js", "sidebar/createSidebar.js"]
         }
     ],
     "icons": {

@@ -1,7 +1,20 @@
-var sidebar_el = 
-`<div id="spanCenter">
+$(document).ready(function() {
+    var sidebar_el = 
+    `
     <div id="sidebar">
-        <iframe src="https://docs.erpnext.com/docs/user/manual/en"></iframe>
+        <div id="sidebar-content"></div>
     </div>
-</div>`;
-$('body').append(sidebar_el);
+    `;
+    $('body').append(sidebar_el);
+    $.ajax({
+        method: "GET",
+        url: "https://quick-manual.herokuapp.com/introduction",     // swap /introduction depending on docs [ WILL CHANGE ON NEXT PUSH WITH DYNAMIC ALGO ]
+        dataType: "html",
+        success: (data) => {
+            $('#sidebar-content').html(data);
+        },
+        error: (err) => {
+            console.log(err);
+        }
+    });
+});
