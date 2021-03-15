@@ -4,7 +4,7 @@ function loadManualContent() {
     console.log(url_context);
     $.ajax({
         method: "GET",
-        url: url_context,     // swap /introduction depending on docs [ WILL CHANGE ON NEXT PUSH WITH DYNAMIC ALGO ]
+        url: url_context,     
         dataType: "html",
         success: (data) => {
             var manualContent = $('#sidebar-content');
@@ -38,9 +38,17 @@ $(document).ready(function() {
 
 chrome.runtime.onMessage.addListener(function(req, sender, sendResponse) {
     if (req.status === 'complete') {
-        var getFromUrl = req.url.split('http://192.168.100.36/desk#modules/');  // https://*.dedicate.hooman.design/*
-        console.log(getFromUrl[1]);
-        if (getFromUrl[1] != undefined) { context = getFromUrl[1].toLowerCase(); }
+        // get query from url algo
+        var urlArr = req.url.split('/');
+        var queryArr = new Array();
+        var storeUrl = false;
+        for(urlStr of urlArr) {
+            if (urlStr.includes('desk#')) { storeUrl = true; } 
+            if (storeUrl === true) { queryArr.push(urlStr); }
+        }
+
+        console.log(queryArr);
+        if (queryArr[1] != undefined) { context = queryArr[1].toLowerCase(); }
         reloadManualContent();
     }
     
