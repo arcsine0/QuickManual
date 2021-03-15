@@ -1,6 +1,8 @@
 var context = 'introduction';
+var contextA = 'def';
+var prevContext;
 function loadManualContent() {
-    var url_context = "https://quick-manual.herokuapp.com/" + context;
+    var url_context = "https://quick-manual.herokuapp.com/" + context + '/' + contextA;
     console.log(url_context);
     $.ajax({
         method: "GET",
@@ -20,6 +22,7 @@ function loadManualContent() {
 function reloadManualContent() {
     $('#sidebar-content').empty();
     loadManualContent();
+    console.log(prevContext);
 }
 $(document).ready(function() {
     
@@ -46,10 +49,24 @@ chrome.runtime.onMessage.addListener(function(req, sender, sendResponse) {
             if (urlStr.includes('desk#')) { storeUrl = true; } 
             if (storeUrl === true) { queryArr.push(urlStr); }
         }
-
         console.log(queryArr);
-        if (queryArr[1] != undefined) { context = queryArr[1].toLowerCase(); }
+        if (queryArr[1] != undefined) {
+            if (queryArr[0] != 'desk#List') {
+                context = queryArr[1].toLowerCase();
+                contextA = 'def';
+            }
+            else {
+                context = prevContext;
+                if (queryArr[1].includes('%20')) {
+                    contextA = queryArr[1].replace('%20', '-').toLowerCase();
+                }
+                else {
+                    contextA = queryArr[1].toLowerCase();
+                }
+            }
+        }
         reloadManualContent();
+        prevContext = context;
     }
     
     sendResponse({ });
